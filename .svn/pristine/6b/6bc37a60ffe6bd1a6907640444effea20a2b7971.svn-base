@@ -1,0 +1,22 @@
+package ptm.daejang.controller;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(value="/Daejang") 
+public class M_DaejangController {
+	
+	@RequestMapping(value = "/M-Daejang")
+	public String T_list(){	
+	
+		/*
+		 * List<PtVO> list = t_managementService.selectList(vo);
+		 * model.addAttribute("list", list);
+		 */
+		
+		return "Daejang/M-Daejang";
+	}
+
+}

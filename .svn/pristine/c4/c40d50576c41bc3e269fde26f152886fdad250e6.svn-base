@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptm.team.mapper.M_ManagementMapper">
+	
+	<!-- PT 등록된 트레이너 리스트 / M-List.jsp -->
+	<select id="selectList" resultType="m_ptVO" parameterType="m_listVO">
+		 SELECT p.p_no
+			  , p.t_no
+		      , p.m_qr
+			  , p.p_state
+			  , p.p_ok
+			  , p.p_comment
+			  , t.t_name
+			  , t.t_realP
+			  , (SELECT MAX(r_ct) FROM round WHERE m_qr = p.m_qr AND p.p_no = p_no AND t.t_no = p.t_no) as r_ct  
+		   FROM pt p left join trainer t on p.t_no = t.t_no
+		  WHERE p.m_qr = #{m_qr}
+			<if test = "searchMember != null">
+			AND t.t_name like CONCAT ('%', #{searchMember},'%')
+			</if>
+		  UNION 
+		 SELECT p.p_no
+			  , p.t_no
+			  , p.m_qr
+			  , p.p_state
+			  , p.p_ok
+			  , p.p_comment
+			  , t.t_name
+			  , t.t_realP
+			  , (SELECT MAX(r_ct) FROM round WHERE m_qr = p.m_qr AND p.p_no = p_no AND t_no = p.t_no) as r_ct
+		   FROM trainer t left join pt p on p.t_no = t.t_no
+		  WHERE p.m_qr = #{m_qr}
+			<if test = "searchMember != null">
+			AND t.t_name like CONCAT ('%', #{searchMember},'%')
+			</if>
+		</select> 
+	
+	<!-- PT 등록된 트레이너 상세보기 / M-List.jsp -->
+	<select id="selectDetail" resultType="trainerVO" parameterType="String">
+	 SELECT  	t_name
+			 , 	t_realP
+			 , 	t_addr1
+			 , 	t_addr2
+			 , 	t_etc
+		  FROM trainer
+		 WHERE t_no = #{t_no}
+	</select> 
+	
+	<!-- PT 등록된 회원의 정보 / M-Chart.jsp -->
+	<select id="selectPtm" resultType="m_ptVO" parameterType="m_ptVO">
+		SELECT p_no
+		     , t_no
+		     , m_qr
+		     , p_kg
+		     , p_bone
+		     , p_fat
+		     , p_comment
+	 	  FROM pt
+		 WHERE t_no = #{t_no}
+	  	   AND p_no = #{p_no}
+	  	   AND m_qr = #{m_qr}
+	</select>
+	
+	<!-- PT 등록된 회원의 운동 정보 / T-Chart.jsp -->
+	<select id="selectPtm2" resultType="hashmap" parameterType="exerciseVO">
+		SELECT  
+			 (SELECT COUNT(CASE WHEN e_part='A' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS A
+			,(SELECT COUNT(CASE WHEN e_part='B' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS B
+			,(SELECT COUNT(CASE WHEN e_part='C' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS C
+			,(SELECT COUNT(CASE WHEN e_part='D' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS D
+			,(SELECT COUNT(CASE WHEN e_part='E' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS E
+			,(SELECT COUNT(CASE WHEN e_part='F' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS F
+			,(SELECT COUNT(CASE WHEN e_part='G' THEN 1 END)
+			   FROM exercise
+			  WHERE t_no = #{t_no}
+				AND p_no = #{p_no}
+				AND m_qr = #{m_qr}) AS G
+		FROM DUAL
+	</select>
+	
+	<!-- PT등록된 회차 가져오기 -->
+	<select id="selectMround" resultType="roundVO" parameterType="roundVO">
+		SELECT * FROM round
+		 WHERE t_no = #{t_no}
+		   AND p_no = #{p_no}
+		   AND m_qr = #{m_qr}
+	  ORDER BY r_no DESC
+	</select>
+	
+	<!-- PT등록된 해당 회차 운동 가져오기 -->
+	<select id="selectMexercise" resultType="exerciseVO" parameterType="exerciseVO">
+		SELECT * FROM exercise
+		 WHERE t_no = #{t_no}
+		   AND r_no = #{r_no}
+		   AND p_no = #{p_no}
+		   AND m_qr = #{m_qr}
+	</select>
+	
+</mapper>

@@ -1,0 +1,156 @@
+@charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	font-family: 'NanumSquare', sans-serif;
+	font-size:70%;
+	width:100%;
+	height:100vh;
+	margin:0;
+	padding:0;
+	overflow: auto;
+	background-color: #F2F2F2;
+}
+.allcontents
+{
+	width:40%;
+	margin:auto;
+	background-color: white;
+}
+.topcontents
+{
+	border-bottom:1px solid #F2F2F2;
+	top:0;
+	text-align:center;
+	width:100%;
+	height:5vh;
+	display:inline-block;
+}
+.topback
+{	
+	border:0;
+	background: none;
+	margin:0;
+	padding-bottom:0.01rem;
+}
+.toplogo
+{
+	display:inline-block;
+	width:80%;
+}
+.topimg
+{
+	width:110px;
+	height:50px;
+	margin:auto;
+}
+.topgrid
+{
+	border:0;
+	background: none;
+	margin:0;
+	padding-bottom:0.01rem;
+}
+.navicontents
+{
+	border-bottom:1px solid #F2F2F2;
+	position:relative;
+	font-size: 1.5rem;
+	padding-top:1em;
+	display: none;
+}
+a
+{
+	text-decoration:none;
+	color:black;
+}
+a:hover
+{
+	color:#288CD2
+}
+ul
+{
+	list-style: none;
+}
+.tab
+{
+	display:flex;
+	width:100%;
+	height:5%;
+	margin-bottom:3em;
+}
+.idTab
+{
+	margin:0;
+	padding:0;
+	width:50%;
+	text-align:center;
+	font-size:1.5em;
+	border: 0.1em #F2F2F2 solid;
+	cursor:pointer;
+	padding:0.5em 3em;
+	background-color: #F2F2F2;
+}
+.idTab:hover
+{
+	background-color: #506EA5;
+	color:white;
+}
+.pwTab
+{
+	margin:0;
+	padding:0;
+	width:50%;
+	text-align:center;
+	font-size:1.5em;
+	border: 0.1em #F2F2F2 solid;
+	border-bottom:none;
+	cursor:pointer;
+	padding:0.5em 3em;
+}
+.pwTab:hover
+{
+	background-color: #506EA5;
+	color:white;
+}
+.pwFind
+{
+	width:100%;
+}
+.pwFind table
+{
+	width:90%;
+	text-align:center;
+	margin:auto;
+	font-size:1.5em;
+	
+}
+#pwFindButton
+{
+	width:100%;
+}
+@media screen and (max-width:787px)
+{
+	body
+	{
+		width:100%;
+		background-color: white;
+	}
+	.allcontents
+	{
+		width:100%;
+		/* padding-top: 3em; */
+	}
+	.topcontents
+	{
+		height:50px;
+	}
+	.tab
+	{
+		height:45px;
+	}
+	.pwTab
+	{
+		padding:0.5em 1em;
+	}
+}

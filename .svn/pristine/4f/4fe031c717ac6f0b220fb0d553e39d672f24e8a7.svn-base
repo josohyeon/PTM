@@ -1,0 +1,84 @@
+package ptm.team.vo;
+
+public class M_PtVO extends TrainerVO {
+	private int    p_no;
+	private String p_ok;
+	private int    t_no;
+	private String m_qr;
+	private double p_kg;
+	private double p_bone;
+	private double p_fat;
+	private String p_state;
+	private String p_comment;
+	private int    r_ct;
+	
+	
+	
+	public M_PtVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public int getP_no() {
+		return p_no;
+	}
+	public void setP_no(int p_no) {
+		this.p_no = p_no;
+	}
+	
+	public String getP_ok() {
+		return p_ok;
+	}
+	public void setP_ok(String p_ok) {
+		this.p_ok = p_ok;
+	}
+	public int getT_no() {
+		return t_no;
+	}
+	public void setT_no(int t_no) {
+		this.t_no = t_no;
+	}
+	public String getM_qr() {
+		return m_qr;
+	}
+	public void setM_qr(String m_qr) {
+		this.m_qr = m_qr;
+	}
+	public double getP_kg() {
+		return p_kg;
+	}
+	public void setP_kg(double p_kg) {
+		this.p_kg = p_kg;
+	}
+	public double getP_bone() {
+		return p_bone;
+	}
+	public void setP_bone(double p_bone) {
+		this.p_bone = p_bone;
+	}
+	public double getP_fat() {
+		return p_fat;
+	}
+	public void setP_fat(double p_fat) {
+		this.p_fat = p_fat;
+	}
+	public String getP_state() {
+		return p_state;
+	}
+	public void setP_state(String p_state) {
+		this.p_state = p_state;
+	}
+	public String getP_comment() {
+		return p_comment;
+	}
+	public void setP_comment(String p_comment) {
+		this.p_comment = p_comment;
+	}
+	public int getR_ct() {
+		return r_ct;
+	}
+	public void setR_ct(int r_ct) {
+		this.r_ct = r_ct;
+	}
+	
+	
+}

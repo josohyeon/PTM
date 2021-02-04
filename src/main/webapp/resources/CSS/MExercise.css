@@ -1,0 +1,134 @@
+@charset "UTF-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	font-family: 'NanumSquare', sans-serif;
+	font-size:70%;
+	width:100%;
+	height:100vh;
+	margin:0;
+	padding:0;
+	overflow: auto;
+	/* background-color: #F2F2F2; */
+}
+.allcontents
+{
+	/* border:1px solid black; */
+	width:40%;
+	margin:auto;
+	background-color: white;
+	overflow:auto;
+}
+.topcontents
+{
+	border-bottom:1px solid #F2F2F2;
+	top:0;
+	text-align:center;
+	width:100%;
+	height:5vh;
+	display:inline-block;
+}
+.toplogo
+{
+	display:inline-block;
+	width:90%;
+}
+.topimg
+{
+	width:110px;
+	height:50px;
+	margin:auto;
+}
+.topback
+{	
+	border:0;
+	background: none;
+	margin:0;
+	padding-bottom:0.01rem;
+}
+.topgrid
+{
+	border:0;
+	background: none;
+	margin:0;
+	padding-bottom:0.01rem;
+}
+ul
+{
+	list-style: none;
+}
+.ExerciseArea
+{
+	width:100%;
+	padding-top:8em;
+	display: block;
+	text-align:center;
+	overflow:auto;
+}
+.ExerciseList
+{
+	width:80%;
+	margin:3em auto;
+	text-align:center;
+	font-size:1em;
+}
+th
+{
+	background-color: #E8F5FF;
+}
+tr
+{
+	border-bottom:1px solid #F2F2F2;
+	font-size:2em;
+    font-weight: 700;
+    width: 20%;
+}
+.subtitle
+{
+	width: 100%;
+    height: 3vh;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+    margin-top: -3em;
+    font-weight: 800;
+}
+.angle-up
+{
+	position:fixed;
+	right:31%;
+	bottom:2%;
+	color:black;
+	font-size: 1rem;
+}
+span
+{
+	font-size:0.5em;
+}
+@media screen and (max-width:787px)
+{
+	body
+	{
+		width:100%;
+	}
+	.allcontents
+	{
+		width:100%;
+		padding-top: 3em;
+	}
+	.topcontents
+	{
+		height:6vh;
+	}
+	.topback
+	{
+		position:absolute;
+		left:3%;
+		top:6%;
+	}
+	.angle-up
+	{
+		right:3%;
+		bottom:2;
+	}
+}

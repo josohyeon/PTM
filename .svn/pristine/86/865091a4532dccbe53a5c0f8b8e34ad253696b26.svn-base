@@ -1,0 +1,359 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Main</title>
+<script src="/resources/Js/jquery-3.5.1.min.js"></script>
+<script>
+	$(document).ready(function()
+	{
+		$(".topgrid").click(function()
+		{
+			$(".navicontents").slideToggle(1000);
+		});
+		
+		$(".tinfo").click(function()
+		{
+			var tno = $(this).find("input[name=t_no]").val();
+			var pno = $(this).find("input[name=p_no]").val();
+			var mqr = $(".d-flex").find("input[name=m_qr]").val();
+			
+			window.location.href = "/Member/M-Chart?t_no="+tno+"&p_no="+pno+"&m_qr="+mqr;
+		}).find(".pictureses").click(function(e)
+		{
+			  return false;
+		});;
+
+	});
+	//트레이너 상세 모달창 정보 불러오기
+	function TrainerDetail(t_no)
+	{	
+		$.ajax({	    	
+	          type : "POST",
+	          url : "/Member/M-ListDetail",
+	          data : {"t_no":t_no},
+	          success : function(data)
+	          { 
+	        	$("#t_addr1").html(data.t_addr1+"<br>"+data.t_addr2);
+	        	$("#t_name").html(data.t_name);
+	        	$("#t_etc").html(data.t_etc);
+	        	$("#t_realP").html(data.t_realP);
+	        	if(data.t_realP == null)
+	        	{
+	        		$("#t_realP").html("<img class='pictureses' src='/resources/Images/BlankProfile.png' onclick='TrainerDetail("+ data.t_no + ")'>");
+	        	}else
+	        	{
+	        		$("#t_realP").html("<img src='/resources/TrainerImages/"+ data.t_realP +"' class='pictureses' onclick='TrainerDetail("+ data.t_no + ")'>");
+	        	}
+	        	$(".modalchang").css("visibility", "visible");
+		      	$(".modalchang").css("opacity", "1");
+		      	$(".modalnaeyong").show();
+	          }
+	      });
+	}
+	
+	//모달창 닫기
+	function closetrainer()
+	{
+		$('.modalnaeyong').hide();
+		$(".modalchang").css("visibility", "hidden");
+		$(".modalchang").css("opacity", "0");
+	}
+	
+</script>
+<style>
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body
+{
+	font-family: 'NanumSquare', sans-serif;
+	font-size:70%;
+	width:100%;
+	height:100vh;
+	margin:0;
+	padding:0;
+	overflow: auto;
+	background-color: #F2F2F2;
+}
+.allcontents
+{
+	width:40%;
+	margin:auto;
+	background-color: white;
+}
+.topcontents
+{
+	top:0;
+	text-align:center;
+	width:100%;
+	height:5vh;
+	display:inline-block;
+}
+.toplogo
+{
+	display:inline-block;
+	width:95%;
+}
+.topimg
+{
+	width:110px;
+	height:50px;
+	margin:auto;
+}
+.topgrid
+{
+	border:0;
+	background: none;
+	margin:0;
+	padding-bottom:0.01rem;
+}
+ul
+{
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+.trainercontents
+{
+	margin:auto;
+	font-size: 2em;
+}
+.trainerlist
+{
+	border:1px solid #F2F2F2;
+	height:20vh;
+	width:100%;
+}
+.trainerlist table
+{
+	display:inline-block;
+	height:150px;
+	floate:right;
+}
+.pictureses
+{
+	width:200px;  
+	height:180px;
+	float:left;
+	margin:0.2em 2em;
+	z-index: 10;
+}
+span
+{
+	font-size : 2.0vh;
+}
+.modalchang
+{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+	z-index: 5000;
+}
+.modalnaeyong
+{
+	display:none;
+	left:35%;
+	top:25%;
+	position:fixed;
+	border-radius:20px;
+	background-color: white;
+	/* padding-top:2em; */
+	width:40%;
+	height:50vh;
+}
+.modalnaeyong table
+{
+	margin: auto;
+    height: 30vh;
+    width: 70%;
+    text-align: center;
+    font-size: 2em;
+}
+th
+{
+	text-align: left;
+}
+.imgtrainer
+{
+	width:25em;
+}
+img
+{
+	cursor:pointer;
+}
+.tinfo
+{
+	cursor:pointer;
+}
+.angle-up
+{
+	position:fixed;
+	right:31%;
+	bottom:2%;
+	color:black;
+	font-size: 1rem;
+}
+@media screen and (max-width:787px)
+{
+	body
+	{
+		width:100%;
+		background-color: white;
+	}
+	.allcontents
+	{
+		width:100%;
+		padding-top: 3em;
+	}
+	.topcontents
+	{
+		height:6vh;
+	}
+	.trainercontents
+	{
+		font-size: 1.5em;
+		margin-top:2em;
+	}
+	.trainerlist
+	{
+		height:22vh;
+	}
+	.trainerlist img
+	{
+		width:120px;
+		height:150px;
+	}
+	.modalchang
+	{
+		width:100%;
+	}
+	.modalnaeyong
+	{
+		left:10%;
+		top:20%;
+		width:80%;
+		overflow:auto;
+	}
+	.modalnaeyong table
+	{
+		height:100%;
+		width:95%;
+		font-size: 1.5em;
+	}
+	.angle-up
+	{
+		right:3%;
+		bottom:2;
+	}
+}
+</style>
+</head>
+<body>
+	<!-- 전체 컨텐츠를 감싼 div -->
+	<div class="allcontents">
+		
+		<!-- 상단 로고와 네비게이션 버튼 -->
+		<div class="topcontents">
+			<a href="/Member/M-List?m_qr=${m_qr }" class="toplogo"><img src="/resources/Images/LOGO.png" class="topimg"></a>
+		</div>
+		
+		<!-- 검색창 -->
+		<nav class="navbar sticky-top navbar-light bg-light">
+			<div class="container-sm">
+				<a class="navbar-brand"></a>
+				<form class="d-flex" action="/Member/M-List" method="get">
+					<input type = "hidden" value="${m_qr}" name="m_qr">
+					<input class="form-control me-2" type="search" placeholder="Name" aria-label="Search" id="searchMember" name="searchMember">
+					<button class="btn btn-outline-primary" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		
+		<!-- PT를 받고 있는 트레이너의 목록이 보이는 div -->
+		<div class="trainercontents">
+			<!-- 트레이너 목록 ul -->
+			※이미지를 누르면 해당 트레이너의<br>프로필을 보실 수 있습니다.
+			<c:forEach items="${list}" var="item" varStatus="status">
+			<ul class="lists">
+				<li>
+					<div class="trainerlist tinfo">
+						<input type="hidden" name="p_no" value="${item.p_no }">
+						<input type="hidden" name="t_no" value="${item.t_no }">
+						<c:if test="${item.t_realP ne null }">
+							<img src="/resources/TrainerImages/${item.t_realP}" class="pictureses" onclick="TrainerDetail(${item.t_no })"><p/>
+						</c:if>
+						<c:if test="${item.t_realP eq null }">
+							<img class="pictureses" src="/resources/Images/BlankProfile.png" onclick="TrainerDetail(${item.t_no })">
+						</c:if> 
+						<table>
+							<tr>
+								<th>트레이너</th>
+								<td>${item.t_name }</td>
+							</tr>
+							<tr>
+								<th>PT등록일</th>
+								<td>${item.p_ok }</td>
+							</tr>
+							<tr>
+								<th>PT회차</th>
+								<td>${item.r_ct }회차</td>
+							</tr>
+						</table>
+					</div>
+				</li>
+			</ul>
+			</c:forEach>
+		</div>
+
+		<!-- 누르면 상단으로 -->
+		<a class="angle-up" href="#top">[TOP]</a>
+		
+	</div>
+	
+	<!-- 트레이너 프로필이 보이는 Modal -->
+	<div class="modalchang">
+		<div class="modalnaeyong">
+			<table class="modaletable">
+				<tr>
+					<th>근무지</th>	
+					<td id="t_addr1"></td>
+				</tr>
+				<tr><td colspan='2' height='1' style='background-color:#cccccc'></tr>
+				<tr>			
+					<th>트레이너</th>
+					<td id="t_name"></td>
+				</tr>
+				<tr><td colspan='2' height='1' style='background-color:#cccccc'></tr>
+				<tr>			
+					<th>경력사항</th>
+					<td id="t_etc"></td>
+				</tr>
+				<tr><td colspan='2' height='1' style='background-color:#cccccc'></tr>
+				<tr>
+					<th id="t_realP" colspan="2">
+					</th>
+				</tr>
+				<tr><td colspan='2' height='1' style='background-color:#cccccc'></tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" value="확인" onclick="closetrainer()" class="btn btn-primary" id="modalbtn">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+</body>
+</html>
