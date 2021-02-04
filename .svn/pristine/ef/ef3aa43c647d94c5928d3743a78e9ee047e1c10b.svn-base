@@ -1,7 +1,0 @@
-package ptm.team.service;
-
-//예시입니다 
-public interface T_SearchService 
-{
-	
-}
