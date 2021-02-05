@@ -1,0 +1,41 @@
+package ptm.member.controller;
+
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ptm.team.service.M_ManagementService;
+import ptm.team.vo.ExerciseVO;
+import ptm.team.vo.M_PtVO;
+import ptm.team.vo.RoundVO;
+
+
+@Controller
+@RequestMapping(value="/Member") 
+public class M_ChartController 
+{	
+	@Inject
+	M_ManagementService m_managementService;
+	
+	// 차트 페이지
+	@RequestMapping(value = "/M-Chart")
+	public String chart(Model model, M_PtVO mvo, RoundVO vo, String m_qr, ExerciseVO evo) throws Exception
+	{	
+		//m_qr 값을 RoundVO vo에 set해줌
+		vo.setM_qr(m_qr);
+		//PT 등록된 회원정보 불러옴
+		M_PtVO m_ptVO = m_managementService.selectPtm(mvo);
+
+		Map<String, Object> exvo = m_managementService.selectPtm2(evo);
+		
+		model.addAttribute("m_ptVO", m_ptVO);
+		model.addAttribute("exvo", exvo);
+		
+		return "Member/M-Chart";
+	}
+	
+}
